@@ -1,0 +1,216 @@
+@startuml
+title Modelo Relacional
+left to right direction
+
+hide circle
+
+entity Organizacao {
+    idOrganizacao {PK}
+    NIF {UNIQUE}
+    email {UNIQUE}
+    idGestor (idColaborador - Colaborador) {N, FK}
+    nome 
+    contactoTelefonico 
+    enderecoWeb 
+}
+
+entity Administrativo {
+    nome {PK}
+    idUtilizador {FK} 
+    email
+}
+
+entity Colaborador {
+    idColaborador (idUtilizador - Utilizador) {PK, FK}
+    idOrganizacao {FK}
+    nome 
+    contactoTelefonico 
+    email 
+    funcao
+}
+
+entity Freelancer {
+    idFreelancer (idUtilizador - Utilizador) {PK}
+    NIF {UNIQUE}
+    nome 
+    contactoTelefonico 
+    email 
+}
+
+entity HabilitacaoAcademica {
+    idHabilitacao {PK}
+    idFreelancer {FK}
+    grau 
+    designacaoCurso 
+    nomeInstituicao 
+    mediaCurso 
+}
+
+entity ReconhecimentoCT { 
+    idCompetenciaTecnica {PK, FK}
+    idFreelancer {PK, FK}
+    nivelGrauProficiencia (nivel) {PK, FK}
+    dataReconhecimento
+}
+
+entity Utilizador {
+    idUtilizador{PK}
+    designacao (role) {FK}
+    nome
+    email
+    password
+}
+
+entity Role {
+    designacao {PK}
+}
+
+entity CategoriaTarefa {
+    idCategoria {PK}
+    idAreaAtividade {FK}
+    {UNIQUE PAIR idCategoria, idAreaAtividade}
+    descricao
+}
+
+entity CaraterizaçãoCompetenciatecnica {
+    idCompetenciaTecnica {PK, FK}
+    idCategoria {PK, FK}
+    caracter
+    nivelGrauMinimo (nivel - GrauProficiencia) {FK}
+}
+
+entity Tarefa {
+    idTarefa {PK}
+    {UNIQUE referenciaTarefa, idOrganizacao {FK}}
+    idCategoria {FK}
+    idEstadoTarefa {FK}
+    designacao
+    descricaoInformal
+    descricaoTecnica
+    estimativaDuracao
+    estimativaCusto
+}
+
+entity EstadoTarefa {
+    idEstadoTarefa {PK}
+    designacao
+}
+
+entity Anuncio {
+    idAnuncio {PK}
+    idTarefa {FK, UNIQUE}
+    idTipoRegimento {FK}
+    dataInicioPublicitacao
+    dataFimPublicitacao
+    dataInicioCandidatura
+    dataFimCandidatura
+    dataInicioSeriacao
+    dataFimSeriacao
+}
+
+entity Candidatura {
+    idAnuncio {PK, FK}
+    idFreelancer {PK, FK}
+    dataCandidatura
+    valorPretendido
+    nrDias
+    txtApresentacao
+    txtMotivacao
+}
+
+entity ProcessoSeriacaoColaborador {
+    idAnuncio {PK, FK}
+    idColaborador {PK, FK}
+    idOrganizacao {PK, FK}
+}
+
+entity ProcessoSeriacao {
+    idAnuncio {PK, FK}
+    idTipoRegimento {FK}
+    dataRealizacao
+}
+
+entity Classificacao {
+    idAnuncio{PK, FK}
+    idFreelancer{PK, FK}
+    lugar 
+}
+
+entity TipoRegimento {
+    idTipoRegimento{PK}
+    designacao
+    descricaoRegras
+}
+
+entity CompetenciaTecnica {
+    idCompetenciaTecnica{PK}
+    idAreaAtividade {FK}
+    descricaoBreve
+    descricaoDetalhada
+}
+
+entity GrauProficiencia {
+    idCompetenciaTecnica{PK, FK}
+    nivel {PK}
+    designacao 
+}
+
+entity AreaAtividade{
+    idAreaAtividade {PK}
+    descricaoBreve
+    descricaoDetalhada
+}
+
+entity EnderecoPostal {
+    idOrganizacao {PK, FK}
+    morada
+    codigoPostal
+    localidade
+}
+
+Organizacao "1" --> "1" EnderecoPostal
+Organizacao "1" --> "1..*" Colaborador
+Organizacao "1" --> "1" Colaborador
+Organizacao "1" --> "*" Tarefa
+
+Freelancer "0..1" --> "1" Utilizador
+Freelancer "1" --> "*" HabilitacaoAcademica
+Freelancer "0..1" --> "*" ReconhecimentoCT
+
+ReconhecimentoCT "*" --> "1" GrauProficiencia
+ReconhecimentoCT "*" --> "1" CompetenciaTecnica
+
+Administrativo "0..1" --> "1" Utilizador
+
+Colaborador "0..1" --> "1" Utilizador
+
+Tarefa "*" --> "1" Colaborador
+Tarefa "*" --> "1" CategoriaTarefa
+Tarefa "1" --> "0..1" Anuncio
+Tarefa "1" --> "1" EstadoTarefa
+
+Anuncio "*" --> "1" TipoRegimento
+Anuncio "*" --> "1" Colaborador
+Anuncio "1" --> "*" Candidatura
+Anuncio "1" --> "0..1" ProcessoSeriacao
+
+ProcessoSeriacaoColaborador "1..*"<-- "1" Colaborador
+ProcessoSeriacao "1" --> "*" Classificacao
+ProcessoSeriacao "*" --> "1" TipoRegimento
+ProcessoSeriacao "1*" --> "1..*" ProcessoSeriacaoColaborador
+
+Classificacao "0..1" --> "1" Candidatura
+
+Candidatura "*" --> "1" Freelancer
+
+CategoriaTarefa "1" --> "*" CaraterizaçãoCompetenciatecnica
+CategoriaTarefa "1" --> "1" AreaAtividade
+
+CaraterizaçãoCompetenciatecnica "*" --> "1" CompetenciaTecnica
+
+CompetenciaTecnica "*" --> "1" AreaAtividade
+CompetenciaTecnica "1" --> "*" GrauProficiencia
+
+Utilizador "1" --> "1..2" "Role"
+
+@enduml
