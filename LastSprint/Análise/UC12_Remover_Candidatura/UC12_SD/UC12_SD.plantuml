@@ -1,0 +1,33 @@
+@startuml 
+actor FreelancerUser as FreelancerUser
+FreelancerUser -> AreaFreelancerUI : Consulta as suas candidaturas em aberto
+activate FreelancerUser
+activate AreaFreelancerUI
+AreaFreelancerUI -> AlterarCandidaturaCtrl : getAllCandidaturasByFreelancer(Email emailFreelancer)
+activate AlterarCandidaturaCtrl
+
+
+AlterarCandidaturaCtrl -> RepositorioCandidatura : getAllCandidaturasFreelancer(Email emailFreelancer)
+activate RepositorioCandidatura
+deactivate RepositorioCandidatura
+
+AlterarCandidaturaCtrl --> AreaFreelancerUI : lista candidaturas  em aberto do freelancer
+deactivate AlterarCandidaturaCtrl
+
+AreaFreelancerUI -> AlterarCandidaturaCtrl : removerCandidatura(candidatura)
+activate AlterarCandidaturaCtrl
+
+AlterarCandidaturaCtrl -> RepositorioCandidatura : eliminarCandidatura(candidatura)
+deactivate AlterarCandidaturaCtrl
+activate RepositorioCandidatura
+
+RepositorioCandidatura -> BaseDados : deleteCandidatura(Candidatura candidatura)
+activate BaseDados
+RepositorioCandidatura <-- BaseDados : ok
+deactivate BaseDados
+
+RepositorioCandidatura --> AreaFreelancerUI : OK
+deactivate RepositorioCandidatura
+AreaFreelancerUI --> FreelancerUser : operação bem sucedida
+deactivate AreaFreelancerUI
+@enduml

@@ -1,0 +1,47 @@
+@startuml 
+actor FreelancerUser as FreelancerUser
+participant AreaFreelancerUI
+participant AlterarCandidaturaCtrl
+
+participant ServiceController as sc
+
+FreelancerUser -> AreaFreelancerUI : Inicia sessao para se poder candidatar
+activate FreelancerUser
+activate AreaFreelancerUI
+AreaFreelancerUI -> AlterarCandidaturaCtrl : getAllCandidaturasByFreelancer(Email emailFreelancer)
+activate AlterarCandidaturaCtrl
+
+
+AlterarCandidaturaCtrl -> RepositorioCandidatura : getAllCandidaturasFreelancer(Email emailFreelancer)
+activate RepositorioCandidatura
+deactivate RepositorioCandidatura
+
+AlterarCandidaturaCtrl --> AreaFreelancerUI : lista candidaturas  em aberto do freelancer
+deactivate AlterarCandidaturaCtrl
+
+AreaFreelancerUI -> AlterarCandidaturaCtrl : alterarCandidatura(anuncio, emailFreelancer, dataCandidatura,\nvalorPretendido, nrDias, txtApresentacao, txtMotivacao)
+activate AlterarCandidaturaCtrl
+
+AlterarCandidaturaCtrl -> RepositorioCandidatura : alterarCandidatura(anuncio, freelancer, dataCandidatura, valorPretendido, nrDias, txtApresentacao, txtMotivacao)
+activate RepositorioCandidatura
+
+RepositorioCandidatura -> BaseDados : updateCandidatura(Candidatura candidatura)
+activate BaseDados
+RepositorioCandidatura <-- BaseDados : ok
+deactivate RepositorioCandidatura
+deactivate BaseDados
+
+
+deactivate AlterarCandidaturaCtrl
+AreaFreelancerUI -> sc ** : getCandidaturaByAnuncioFreelancer(Anuncio anuncio, String emailFreelancer)
+activate sc
+sc -> RepositorioCandidatura : getCandidaturaByAnuncioFreelancer(Anuncio anuncio, String emailFreelancer)
+deactivate sc
+activate RepositorioCandidatura
+RepositorioCandidatura -> BaseDados: getCandidaturaByAnuncioFreelancer(Anuncio anuncio, String emailFreelancer)
+deactivate RepositorioCandidatura
+activate BaseDados
+deactivate BaseDados
+AreaFreelancerUI --> FreelancerUser : operação bem sucedida, \n mostra dados
+deactivate AreaFreelancerUI
+@enduml
