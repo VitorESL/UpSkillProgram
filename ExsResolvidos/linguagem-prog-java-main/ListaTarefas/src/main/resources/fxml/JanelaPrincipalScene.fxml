@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane onKeyReleased="#teclaPressionadaAction" prefHeight="391.0" prefWidth="407.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.upskill.listatarefas.ui.JanelaPrincipalUI">
+   <center>
+      <ListView fx:id="listViewTarefas" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+         </padding>
+      </ListView>
+   </center>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" onShowing="#abrirMenuFicheirosAction" text="Ficheiros">
+            <items>
+              <MenuItem fx:id="guardarTextoMenuItem" mnemonicParsing="false" onAction="#guardarTextoAction" text="Guardar como texto" />
+                  <MenuItem fx:id="importarTextoMenuItem" mnemonicParsing="false" onAction="#importarTextoAction" text="Importar ficheiro texto" />
+                  <MenuItem fx:id="serializarMenuItem" mnemonicParsing="false" onAction="#serializarAction" text="Serialização" />
+                  <MenuItem mnemonicParsing="false" onAction="#desserializarAction" text="Desserialização" />
+                  <MenuItem mnemonicParsing="false" onAction="#sairAction" text="Sair" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" onShowing="#abrirMenuTarefaAction" text="Tarefa">
+            <items>
+              <MenuItem fx:id="menuItemAdicionarTarefas" mnemonicParsing="false" onAction="#adicionarTarefaAction" text="Adicionar" />
+                  <Menu fx:id="removerMenuItem" mnemonicParsing="false" text="Remover">
+                    <items>
+                      <MenuItem fx:id="menuItemLimparTarefas" mnemonicParsing="false" onAction="#limparTarefasAction" text="Todas as tarefas" />
+                        <MenuItem mnemonicParsing="false" text="Tarefa selecionada" />
+                    </items>
+                  </Menu>
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>
