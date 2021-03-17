@@ -1,0 +1,19 @@
+@startuml
+activate User
+User->UC9_UI:consult/edit
+activate UC9_UI
+UC9_UI-->User:Introduza os dados
+User->UC9_UI:parcela variavel amador
+deactivate User
+UC9_UI->UC9_Controller:consultar dados
+deactivate UC9_UI
+activate UC9_Controller
+UC9_Controller-->Plataforma:findAmador(parcelaVariavel)
+alt exist true
+activate Plataforma
+Plataforma-->UC9_Controller: show data
+UC9_Controller--> UC9_UI: show data
+UC9_UI -->User: show data
+end
+
+@enduml

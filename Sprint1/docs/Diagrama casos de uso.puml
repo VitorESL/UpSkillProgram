@@ -1,0 +1,15 @@
+@startuml
+left to right direction
+User -> Registar Atleta
+User -> Consultar Atleta
+User -> Listar Atletas por Nome
+User -> Listar Atletas por Prémio
+User -> Consultar Valor por Atleta
+User -> Consultar Valor Total
+User ->Listar Atletas por categoria, modalidade, nome
+User ->Alterar parcela variável profissionais
+User ->Alterar parcela variável amadores
+User ->Alterar Valor mínimo amador
+User ->Atualizar Percentagem Antiguidade
+
+@enduml

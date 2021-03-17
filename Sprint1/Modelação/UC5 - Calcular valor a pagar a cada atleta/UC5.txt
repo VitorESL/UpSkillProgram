@@ -1,0 +1,11 @@
+@startuml
+
+title UC5 - Calcular valor a pagar a cada atleta
+
+Utilizador --> Sistema: inicia o cálculo do valor a pagar ao atleta
+Sistema --> Utilizador: solicita o número de identificação civil do atleta
+Utilizador --> Sistema: introduz o número de identificação civil do atleta
+Sistema --> Utilizador: solicita os valores do atleta, consoante a categoria
+Utilizador --> Sistema: Amador(prémio mensal), Semiprofissional ou Profissional (parcela fixa)
+Sistema --> Utilizador: apresenta o valor a pagar ao atleta
+@enduml

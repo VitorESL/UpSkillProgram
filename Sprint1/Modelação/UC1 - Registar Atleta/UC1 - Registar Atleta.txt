@@ -1,0 +1,17 @@
+@startuml
+activate User
+User->Sistema: Iniciar Registo Novo Atleta
+activate Sistema
+Sistema-->User:solicita os dados necessários (nome, identificação civil, género, data de nascimento)
+User->Sistema:introduz os dados solicitados
+Sistema --> User: Lista de atividades que o atleta pode frequentar
+User -> Sistema:Atividade do Atleta
+Sistema --> User: Lista de categorias em que o atleta se pode enquadrar
+User -> Sistema: Categoria do Atleta
+Sistema -->User: Mostra e pede confirmação dos dados
+User -> Sistema: Confirma os dados
+Sistema --> User: Atleta registada com sucesso
+
+deactivate Sistema
+deactivate User
+@enduml

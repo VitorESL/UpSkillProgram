@@ -1,0 +1,35 @@
+@startuml
+activate User
+User->UC11_UI:editar percentagem antiguidade
+activate UC11_UI
+UC11_UI-->User:Introduza os dados
+User->UI11_UI: novo valor percentagem antiguidade
+deactivate User
+UC11_UI->UC11_Controller:editar dados
+deactivate UC11_UI
+activate UC11_Controller
+UC11_Controller-->Plataforma:findNaoProfissional(percentagemAntiguidade)
+alt novos dados sao diferentes dos existentes
+UC11_Controller->NaoProfissional: edit(percentagemAntiguidade)
+activate NaoProfissional
+NaoProfissional --> UC11_Controller: sucesso
+deactivate NaoProfissional
+UC11_Controller -->UC11_UI:sucesso
+deactivate UC11_Controller
+activate UC11_UI
+activate User
+UC11_UI-->User:Percentagem Antiguidade registado com sucesso
+deactivate UC11_UI
+deactivate User
+else novos dados sao iguais aos ja existentes
+Plataforma-->UC11_Controller:sucesso
+deactivate Plataforma
+UC11_Controller -->UC11_UI:sucesso
+deactivate UC11_Controller
+activate UC11_UI
+UC11_UI-->User:Introduza um valor diferente do existente
+deactivate UC11_UI
+activate User
+deactivate User
+end
+@enduml

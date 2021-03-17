@@ -1,0 +1,19 @@
+@startuml
+activate User
+User->UC10_UI:consult
+activate UC10_UI
+UC10_UI-->User:Introduza os dados
+User->UC10_UI:valor minimo amador
+deactivate User
+UC10_UI->UC10_Controller:consultar dados
+deactivate UC10_UI
+activate UC10_Controller
+UC10_Controller-->Plataforma:findAmador(valorMinimo)
+alt exist true
+activate Plataforma
+Plataforma-->UC10_Controller: show data
+UC10_Controller--> UC10_UI: show data
+UC10_UI -->User: show data
+end
+
+@enduml

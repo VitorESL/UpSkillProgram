@@ -1,0 +1,14 @@
+org\upskill\clubedesportivo\Main.class
+org\upskill\clubedesportivo\Profissional.class
+org\upskill\clubedesportivo\CalculoIRS.class
+org\upskill\clubedesportivo\Genero.class
+org\upskill\clubedesportivo\NaoProfissional.class
+org\upskill\clubedesportivo\Actividade.class
+org\upskill\clubedesportivo\Atleta.class
+org\upskill\clubedesportivo\Amador.class
+org\upskill\clubedesportivo\ComparatorOrdenacaoCategoriaActividadeNome.class
+org\upskill\clubedesportivo\ClubeDesportivo.class
+org\upskill\clubedesportivo\CalculoFCM.class
+org\upskill\clubedesportivo\ComparatorPremioReverse.class
+org\upskill\clubedesportivo\ObjectivoTreino.class
+org\upskill\clubedesportivo\Semiprofissional.class
