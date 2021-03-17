@@ -1,0 +1,8 @@
+@startuml
+activate User
+User->Sistema: Cosultar Lista de Prémios dos Atletas
+activate Sistema
+Sistema-->User:Lista de Atletas ordenada por ordem inversa dos prémios
+deactivate Sistema
+deactivate User
+@enduml

@@ -1,0 +1,37 @@
+@startuml
+activate User
+User->UC1_UI:create
+activate UC1_UI
+UC1_UI-->User:Introduza os dados
+User->UC1_UI:introduz nome, ID civil, dataNasc,género
+deactivate User
+UC1_UI->UC1_Controller:registarAtleta(nome, ID,dNasc, gen)
+deactivate UC1_UI
+activate UC1_Controller
+UC1_Controller-->Sistema:findAtleta(ID)
+activate Sistema
+Sistema-->UC1_Controller: exist
+alt exist true
+UC1_Controller--> UC1_UI: Atleta já existe
+UC1_UI -->User: Atleta já existe
+else exist false
+deactivate Sistema
+UC1_Controller->Atleta: create(nome, ID,dNasc, gen)
+activate Atleta
+Atleta-->UC1_Controller:a1
+deactivate Atleta
+UC1_Controller ->Sistema:adicionarAtleta(a1)
+activate Sistema
+Sistema->Sistema:adicionar(a1)
+Sistema-->UC1_Controller:sucesso
+deactivate Sistema
+UC1_Controller -->UC1_UI:sucesso
+deactivate UC1_Controller
+activate UC1_UI
+UC1_UI-->User:Atleta registado com sucesso
+deactivate UC1_UI
+activate User
+deactivate User
+end
+
+@enduml

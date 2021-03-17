@@ -1,0 +1,31 @@
+@startuml
+
+activate User
+User -> UC2_UI: Iniciar consulta de atleta
+activate UC2_UI
+UC2_UI -->User: Introduza o ID
+User->UC2_UI:Introduz ID
+deactivate UC2_UI
+UC2_UI->Ctrl:consultarAtleta(ID)
+activate Ctrl
+Ctrl->Sistema: findAtleta(ID)
+activate Sistema
+Sistema-->Ctrl: exist
+deactivate Sistema
+deactivate Ctrl
+alt exist true
+
+Ctrl-->UC2_UI:dados atleta
+UC2_UI-->User: dados atleta
+else exist false
+Ctrl --> UC2_UI: Atleta não registado
+UC2_UI-->User:Atleta não registado
+end
+
+
+
+
+
+deactivate User
+
+@enduml

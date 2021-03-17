@@ -1,0 +1,19 @@
+@startuml
+activate User
+User->UC11_UI:consult
+activate UC11_UI
+UC11_UI-->User:Introduza os dados
+User->UC11_UI:valor percentagem antiguidade nao profissional
+deactivate User
+UC11_UI->UC11_Controller:consultar dados
+deactivate UC11_UI
+activate UC11_Controller
+UC11_Controller-->Plataforma:findNaoProfissional(percentagemAntiguidade)
+alt exist true
+activate Plataforma
+Plataforma-->UC11_Controller: show data
+UC11_Controller--> UC11_UI: show data
+UC11_UI -->User: show data
+end
+
+@enduml

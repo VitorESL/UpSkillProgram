@@ -1,0 +1,8 @@
+@startuml
+activate User
+User->Sistema: Cosultar Lista Atletas
+activate Sistema
+Sistema-->User:Lista de Atletas ordenada por nome
+deactivate Sistema
+deactivate User
+@enduml

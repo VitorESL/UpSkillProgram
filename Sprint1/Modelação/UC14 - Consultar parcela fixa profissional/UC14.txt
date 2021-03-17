@@ -1,0 +1,5 @@
+UC9 - Alterar parcela fixa profissional
+
+o utilizador inicia a consulta. O sistema responde com a indicacao.
+
+b - O utilizador indica a intencao de alterar o valor. O sistema efetua a atualizacao e responde que esta completa. 

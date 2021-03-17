@@ -1,0 +1,35 @@
+@startuml
+activate User
+User->UC9_UI:editar parcela variavel
+activate UC9_UI
+UC9_UI-->User:Introduza os dados
+User->UC9_UI: nova parcela variavel amador
+deactivate User
+UC9_UI->UC9_Controller:editar dados
+deactivate UC9_UI
+activate UC9_Controller
+UC9_Controller-->Plataforma:findAmador(parcelaVariavel)
+alt novos dados sao diferentes dos existentes
+UC9_Controller->Amador: edit(parcelaVariavel)
+activate Amador
+Amador --> UC9_Controller: sucesso
+deactivate Amador
+UC9_Controller -->UC9_UI:sucesso
+deactivate UC9_Controller
+activate UC9_UI
+activate User
+UC9_UI-->User:Parcela Variavel registado com sucesso
+deactivate UC9_UI
+deactivate User
+else novos dados sao iguais aos ja existentes
+Plataforma-->UC9_Controller:sucesso
+deactivate Plataforma
+UC9_Controller -->UC9_UI:sucesso
+deactivate UC9_Controller
+activate UC9_UI
+UC9_UI-->User:Introduza um valor diferente do existente
+deactivate UC9_UI
+activate User
+deactivate User
+end
+@enduml

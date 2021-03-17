@@ -1,0 +1,35 @@
+@startuml
+activate User
+User->UC10_UI:editar valor minimo amador
+activate UC10_UI
+UC10_UI-->User:Introduza os dados
+User->UC10_UI: novo valor minimo amador
+deactivate User
+UC10_UI->UC10_Controller:editar dados
+deactivate UC10_UI
+activate UC10_Controller
+UC10_Controller-->Plataforma:findAmador(valorMinimo)
+alt novos dados sao diferentes dos existentes
+UC10_Controller->Amador: edit(valorMinimo)
+activate Amador
+Amador --> UC10_Controller: sucesso
+deactivate Amador
+UC10_Controller -->UC10_UI:sucesso
+deactivate UC10_Controller
+activate UC10_UI
+activate User
+UC10_UI-->User:Valor Minimo registado com sucesso
+deactivate UC10_UI
+deactivate User
+else novos dados sao iguais aos ja existentes
+Plataforma-->UC10_Controller:sucesso
+deactivate Plataforma
+UC10_Controller -->UC10_UI:sucesso
+deactivate UC10_Controller
+activate UC10_UI
+UC10_UI-->User:Introduza um valor diferente do existente
+deactivate UC10_UI
+activate User
+deactivate User
+end
+@enduml

@@ -1,0 +1,54 @@
+@startuml
+left to right direction
+
+class ClubeDesportivo <<Singleton>>{
+    nome
+    dataFundacao
+    atletas
+    --
+    calcPagamento()
+    regAtleta()
+}
+
+
+abstract class Atleta{
+    nome
+    idCivil
+    idade
+    genero
+    actividade
+    fcTrabalho
+    fcMaxima
+    iTreino
+    objectivoTreino
+    fcRepouso
+    --
+    calcAntiguidade()
+}
+
+interface ObjectivoTreino{}
+
+interface Actividade
+
+interface Genero
+
+class Profissional {}
+
+abstract class NaoProfissional {}
+
+class Amador {}
+
+class SemiProfissional {}
+
+ClubeDesportivo"1" o-- "*"Atleta
+Atleta "1" ..|> "1" Actividade
+Atleta "1" ..|> "1" ObjectivoTreino
+Atleta "1" ..|> "1" Genero
+Profissional --|> Atleta
+NaoProfissional --|> Atleta
+SemiProfissional --|> NaoProfissional
+Amador --|> NaoProfissional
+
+
+
+@enduml

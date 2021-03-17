@@ -1,0 +1,92 @@
+@startuml
+left to right direction
+
+class ClubeDesportivo{
+    nome
+    dataFundacao
+    atletas
+    --
+    calcPagamento()
+    regAtleta()
+}
+
+class PremioMensal {
+    valor
+    data
+}
+
+class Competicao {
+
+}
+
+class Atleta{
+    nome
+    nif
+    genero
+    idade
+    actividade
+    dataInscricao
+    --
+    calcAntiguidade()
+}
+
+class Actividade{
+    nome
+}
+
+class FCMaxima{
+}
+
+class FCTrabalho{
+}
+
+class FCRepouso {
+}
+
+class IT{
+
+}
+class Categoria {}
+
+class Genero {
+}
+
+class Profissional {}
+
+class NaoProfissional {}
+
+class Amador {}
+
+class SemiProfissional {}
+
+class Pagamento {}
+
+class ParcelaFixa {}
+
+
+ClubeDesportivo"1"--"1..*"Pagamento: calcula
+ClubeDesportivo"1" -- "*"Atleta: tem inscritos
+Pagamento"1" -- "*" Premio
+Pagamento "1" -- "*" ParcelaFixa
+Atleta"1" -- "1..*"Pagamento: recebe
+PremioMensal "1..*" -- "1"Atleta: atribuído a 
+Atleta "1" -- "1..*" Competicao: participa
+Competicao "1" -- "1" Premio: origina
+Atleta "1" -- "1..*" Actividade: realiza
+Actividade "1" -- "1" FCMaxima: influencia
+FCTrabalho "1" -- "*" FCRepouso: usa
+FCTrabalho "1" -- "*" FCMaxima: usa 
+FCTrabalho "1" -- "1" IT: usa
+Atleta "1" -- "1..*"FCTrabalho: tem
+Atleta "1" -- "1..*" FCMaxima: tem
+Atleta "1" -- "1" Categoria: pertence
+Atleta "1" -- "1" Genero: tem
+Genero "1" -- "1" FCMaxima: influencia
+Profissional <-- Atleta: pode ser
+NaoProfissional <-- Atleta: pode ser
+SemiProfissional <-- NaoProfissional: pode ser
+Amador <-- NaoProfissional: pode ser
+ParcelaFixa -- Categoria: depende 
+
+
+@enduml

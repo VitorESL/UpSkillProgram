@@ -1,0 +1,11 @@
+@startuml
+
+title UC6 - Calcular valor a descontar pelos atletas
+
+Utilizador --> Sistema: inicia o cálculo do valor de IRS a descontar pelos atletas
+Sistema --> Utilizador: apresenta a lista da(s) categoria(s) de atletas para fazer o cálculo
+Utilizador --> Sistema: selecciona a(s) categoria(s) dos atletas para os \nquais pretende calcular o valor de IRS a descontar
+Sistema --> Utilizador: apresenta as categorias seleccionadas
+Utilizador --> Sistema: solicita o cálculo do valor 
+Sistema --> Utilizador: apresenta o valor total de IRS a descontar pelos atletas
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+activate User
+User->Sistema: Iniciar Consulta dos dados de um Atleta
+activate Sistema
+Sistema-->User:solicita identificação civil do Atleta
+User->Sistema:introduz a identificação civil
+Sistema --> User: mostra as informações registadas relativas ao atleta
+deactivate Sistema
+deactivate User
+@enduml
